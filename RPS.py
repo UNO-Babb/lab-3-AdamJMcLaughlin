@@ -2,24 +2,54 @@
 #Name:
 #Date:
 #Assignment:
+print("Adam McLaughlin \t Fall 2025 \t Lab3")
+print("")
 import random
 
 def main():
-  wins = 0
-  ties = 0
-  losses = 0
-  #Create a loop that continues as long as the user wants to play.
-  #User can play as many games as they wish.
+    wins = 0
+    ties = 0
+    losses = 0
 
-  #Randomly choose the computer between 'R', 'P', or 'S'
-  #Prompt the user for their RPS selection
-  #Determine winner and state what happened to the user
-  #Ask the user if they would like to play again.
+    while True:
+        computer = random.choice(["R", "P", "S"])
+        player = input("Pick your weapon (R, P, S): ").strip().upper()
 
-  #In the end, print the stats
-  print("Wins \t Ties \t Losses")
-  print("---- \t ---- \t ------")
-  print(wins, "\t", ties , "\t", losses)
+        if player not in ["R", "P", "S"]:
+            print("Invalid choice. Please choose R, P, or S.")
+            continue
+
+        # Show choices
+        print(f"Computer chose {'Rock' if computer == 'R' else 'Paper' if computer == 'P' else 'Scissors'}")
+        print(f"Player chose {'Rock' if player == 'R' else 'Paper' if player == 'P' else 'Scissors'}")
+
+        # Determine outcome
+        if player == computer:
+            print("Tie")
+            ties += 1
+        elif (player == "R" and computer == "S") or \
+             (player == "P" and computer == "R") or \
+             (player == "S" and computer == "P"):
+            print("You Win!")
+            wins += 1
+        else:
+            print("Computer wins.")
+            losses += 1
+
+        # Ask to play again
+        while True:
+            play_again = input("Would you like to play again? (Y/N): ").strip().lower()
+            if play_again == "y":
+                break
+            elif play_again == "n":
+                print("\nGame Over!!!")
+                print("Wins \t Ties \t Losses")
+                print("---- \t ---- \t ------")
+                print(f"{wins} \t {ties} \t {losses}")
+                return
+            else:
+                print("Please enter Y or N.")
 
 if __name__ == '__main__':
-  main()
+    main()
+
